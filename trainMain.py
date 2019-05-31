@@ -12,9 +12,7 @@ windowSizeY = 500
 
 pygame.init()
 window = pygame.display.set_mode((windowSizeX,windowSizeY))
-# set_mode(resolution,flags,depth)
-# flags of interest : pygame.RESIZABLE,pygame.FULLSCREEN
-#window = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+
 pygame.display.set_caption('Train excitement')
 
 screen = pygame.display.get_surface()
@@ -35,15 +33,10 @@ def drawText(screen,font,text,pos,colour):
     screen.blit(a,pos)
 
 def breakTextIntoPieces(text,font,maxWidth):
-
+    # breaks text into pieces that will fit inside maxWidth for displaying
     size = font.size(text)
     numChars = len(text)
 
-    #roughSizeChar = size/numChars
-
-    #numPieces = int(size[0]/maxWidth)+1
-
-    #pieces = ['' for x in range(0,numPieces)]
     pieces = ['']
 
     # split the text into words
@@ -86,132 +79,11 @@ def drawLongText(text,screen,font,pos,maxWidth,lineHeight):
 
     return newPos # return the final position so we can place later text appropriately
 
-# activities we can do in town
-
-activitiesSmallTown = ['Work','Visit']
-activitiesMediumTown = ['Work','Visit','Business']
-activitiesLargeTown = ['Work','Visit','Business','Education','Travel']
-
-# places in town
-
-placesSmallTown = ['Home','Ancient church','Grave','Cricket pitch']
-placesMediumTown = ['Garage','Factory','Bank','Museum','Gallery','Architect','Stadium','Shopping centre',
-                    'University','Hardware store','Bakery','Store','Accountant','Analyst','Software co.']
-placesBigTown = ['']
-
-# names
-
-boyNames = ['Andy','Andrew','Albert','Alex','Alexander','Bob','Brian','Brennan','Brendan','Bart','Bartholomew',
-            'Chris','Christopher','Colin','Charles','Charlie','Connor','Carl','Christian','David','Dave','Darren','Drew',
-            'Dom','Dominic','Dennis','Edgar','Ewan','Earl','Edward','Eddie','Francis','Frank','Fred','Frederic',
-            'Greg','Gary','Gazza','George','Harry','Harold','Horace','Henry','Howard','Ian','Ivan','Jason',
-            'Justin','John','Jon','Josh','Joshua','Jim','Jerry','Kenneth','Ken','Karl','Kieran','Louis','Lewis','Liam','Leo',
-            'Luke','Laurence','Larry','Les','Mike','Michael','Mark','Malcolm','Mo','Max','Nathan','Nicholas',
-            'Nick','Norman','Navid','Oscar','Oli','Ollie','Oliver','Owen','Pete','Peter','Pedro','Paul','Patrick','Pat'
-            'Quentin','Robert','Richard','Rich','Rick','Robin','Ron','Ronald','Rowan','Sam','Samuel','Sammy',
-            'Sebastian','Sebastien','Seamus','Simon','Stuart','Seb','Thomas','Tom','Tommy','Timothy','Tim',
-            'Tristan','Tristram','Ulysses','Victor','Victoire','Vince','Vincent','William','Will','Wes',
-            'Xavier','Yves','Zack','Zachary','Zacharias']
-
-girlNames = ['Andrea','Alison','Amy','Amelia','Arwen','Abigail','Abbie','Alice','Barbara','Barb','Bethany','Bethan',
-             'Chloe','Christel','Crystal','Carmen','Connie','Catherine','Cath','Deirdre','Dorothy','Dot','Dottie',
-             'Denise','Emily','Em','Emma','Emilia','Elsie','Elizabeth','Eleanor','Elinor','Ellen','Elena',
-             'Frances','Florence','Flo','Flossie','Gabrielle','Gabby','Georgina','Georgie','Greta','Gloria',
-             'Hannah','Hannie','Hattie','Harriet','Helen','Helena','Hazel','Hortense','Henrietta','Irene','Irena',
-             'Isabel','Isabella','Izzy','Issy','Jenny','Jenna','Jen','Jemima','Katherine','Kath','Kathy','Kat',
-             'Krystal','Lizzy','Lizzie','Louise','Lacey','Liz','Lauren','Laura','Mirjam','Miriam','Marnie',
-             'Margaret','Meg','Maggie','Mags','Martha','Maisy','Molly','Millie','Millicent','Mildred',
-             'Nicole','Nicola','Nicky','Naomi','Nellie','Nell','Olive','Olave','Penelope','Penny','Polly',
-             'Petunia','Poppy','Peggy','Rosie','Ros','Rosalyn','Rosalind','Rose','Rosa','Roberta','Sally','Susan',
-             'Sandy','Sandra','Shelley','Sophie','Soph','Stella','Sue','Tessa','Teresa','Terese','Tracy','Tracey',
-             'Tina','Tory','Vanessa','Victoria','Vicky','Wilhelmina','Wanda','Yvonne','Yvette','Zara']
-
-surnames = ['Anderson','Anders','Andrew','Andrews','Abbot','Abbott','Abbot','Abbotson','Atkinson'
-            'Broughley','Briarley','Benson','Beshley','Bottley','Brown','Browett','Brindle','Burns','Baker','Ball','Brockes','Bennett','Bennet','Banner','Bradshaw'
-            'Christian','Carlson','Carlsen','Colley','Chandler','Colin','Collins','Collinson','Cooper','Corbyn','Cobbold','Curry','Cohen','Creaghan','Chesney','Chester'
-            'Derrick','Dobson','Dentley','Dent','Deightley','Downs','Dabner','Day','Deigh','Dodd','Doddson','Davies','Docker'
-            'Edwinson','Edwardson','Elley','Ellinson','Ebb','Evans','Eggerton','Elliott'
-            'Francis','Feltchley','Fauntley','Frimley','French','Ford','Furniss'
-            'George','Garrison','Gaunt','Grey','Gray','Gordon','Gentle','Gentley','Greer','Gardener','Gardiner','Green','Goold','Gould','Granger','German','Greenslade','Greening','Godfrey'
-            'Hooper','Harrison','Howard','Hoppit','Hacker','Horton','Hunt','Hunter','Hammond','Hancock','Hamilton','Hutton','Harryman','Hughes'
-            'Ivanson','Inman'
-            'Johnson','Jotter','Jute','Jordan','Jones','Joiner','Jack','Jackson','Jenson','Jenkins'
-            'Karlsen','Karling','Karlin','Kooper','Kingson','King','Kerr'
-            'Laurence','Larson','Lampard','Leaman','Leeman','Lehmann'
-            'Malcolm','Martin','May','Mason','Miner','Moore'
-            'North','Norton','Norman','Naylor'
-            'Oatley','Oakley','Owens','Owen','O\'Connor','Oliver','O\'Reilly'
-            'Phillips','Philips','Philson','Potter','Parker','Parkinson','Painter','Pinter','Primrose','Priest','Priestley','Patterson','Pence','Posner','Pitt','Pitts','Portman','Porter'
-            'Quentin','Quilter','Quirrel',
-            'Roberts','Robertson','Richards','Richardson','Rowan','Reader','Rendell','Reardon-Smith','Robinson','Rayner','Rainer','Renner','Rusbridger','Rawnsley','Rees','Rowson','Ryan','Rudd'
-            'Stephenson','Stevenson','Stuart','Scuffell','Scollitt','Spencer','Stewart','Sabbagh','Scott','Slater'
-            'Tebbs','Thomas','Thompson','Teller','Tellitt','Titheridge','Thorpe','Taylor'
-            'Underson',
-            'Varley',
-            'Williamson','Williams','Walker','Watkins','Watkinson','Wyatt','Wellington','Weasley','West','Whorley','Wooldridge','Watson','Wiseman'
-            'Yenley','Yateley','Young']
-
-# adjectives hmmm
-
-businessAdjectives = ['RKH','United','Helpful','']
-
 # town name bits
 
 townNameExtraStarts = ['North','East','South','West',
                        'Great','Little','Greater',
                        'Old','New']
-
-townNameStarts = ['Ald','Arn','An','Am','Al','All','Ail','Ain','Art','Att','At',
-                  'Ben','Bel','Ber','Bee','Bes','Besh','Bun','Bin','Birn','Bees','Best','Bash','Bran','Bon','Bosh','Brent',
-                  'Chur','Chor','Cor','Cles','Cran','Crin','Corn','Com','Cosh','Cust','Car','Church',
-                  'Den','Dee','Del','Don','Dun','Dell','Dent',
-                  'En','Ell','El','Em','Edg','Egg','Eg','End','Ent',
-                  'Far','Farm','Farn','Fen','Fenn','Fern','Frim','Flash','Fast','Fett',
-                  'Gor','Gorn','Gon','Gunn','Gun','Gen','Garth','Got','Gott','Gut',
-                  'Ham','Har','Hen','Han','Hor','Hors','Hat','Hath','Hutt',
-                  'In','Inn','Ir','Ith',
-                  'Jack','Jar',
-                  'King','Kin','Kis','Ken','Ker','Kerr','Knut','Kirk',
-                  'Leam','Len','Lem','Lon','Lun','Lud','Low','Lell','Len','Lesh',
-                  'Mid','Mud','Mun','Mon','Mong','Mis','Mist','Must','Mount','Mumm','Ming','Migh','Man','Main',
-                  'Narn','Nen','Nor','Nan','Nus','Nes','Nur','Nutt','Not','Nat',
-                  'On','Ow','Or','Os','Ost','Out',
-                  'Pun','Penn','Pin','Pip','Pup','Pell','Peg','Pag','Pad','Pat','Path',
-                  'Quen','Quin',
-                  'Rus','Red','Run','Rel','Rough','Ren','Rash','Rast','Ret','Rat','Rit',
-                  'Shrew','Shell','Sel','South','Shaf','Ship','Sten','Set','Sat',
-                  'Tan','Tun','Ton','Taun','Taunt','Trent','Tent','Turn','Tom','Teff','Test','Tesh','Tat',
-                  'Un',
-                  'Ven','Van','Vin',
-                  'Wen','Wilm','Worm','Won','Wans',
-                  'Yard','Yor','Yar','Yarn','Yen','Yat']
-
-townNameMiddles = ['an','al','all','aller','am','aigh','ang',
-                   'er','en','enn','ee','eigh',
-                   'ie','ille','in','ing','igh','ill',
-                   'on','ough','out','outer',
-                   'un','ust',
-                   'cas','cash',
-                   'don','dun','dough','deigh',
-                   'ee','eth','edge',
-                   'fer','fur','fern','fen','figh',
-                   'get',
-                   'high','hot','hou',
-                   'ker','kerr','kes','kel',
-                   'mam','mar','marn','mon','min','mun','men','mes',
-                   'nan','nun','non','nonner','ning',
-                   'per','pert','port','por','pun','pin','pen','ping','pang','paing',
-                   'ren','run','ring','rug','rough',
-                   'top','topper','tupper','tup','tip','tiller','ter',
-                   'sun','son','sen','sur','ser','sir','stil','sten','stan',
-                   'ven','vin',
-                   'wen','win','win','wan']
-
-townNameEnds = ['ton','town','ham','ley','leigh','lay','er','chester','burgh','ber','bury'
-                'den','bley','sham','run','brough','ten','low','tor','lea',
-                'ville','hamble','burg','borough','field','fell','wood','shor','shore',
-                'shot','hampton','hill','cester','church','bridge','ford','forth','wark',
-                'worth','fort']
 
 townNameEndsWeighted = ['ton','ton','ton','ton','ton','ton','ton','ton','ton','ton','ton','ton','ton',
                         'town','town','town',
@@ -261,7 +133,7 @@ townNameEndsWeighted = ['ton','ton','ton','ton','ton','ton','ton','ton','ton','t
                         'stoke',
                         'cave','cave']
 
-townNameStarts2 = ['Act','Ad','Af','Ag','Ail','Ain','Al','All','Ald','Am','An','Ap','Ar','Art','As','At','Att','Arn',
+townNameStarts = ['Act','Ad','Af','Ag','Ail','Ain','Al','All','Ald','Am','An','Ap','Ar','Art','As','At','Att','Arn',
                   'Bad','Back','Bag','Ban','Bat','Bran','Bed','Beg','Bel','Ben','Ber','Best','Bet','Bin','Big','Bit','Bog','Bon','Bot','Bott','Bud','Bug','Bun','Butt','But','Bur',
                   'Castle','Cad','Cag','Cal','Call','Cam','Can','Cap','Car','Cas','Cat','Cave','Cor','Cran','Corn','Com','Cosh','Cust','Church','Chur','Chor','Chatt','Chat','Chin','Cran','Craw','Crow',
                   'Den','Del','Don','Dun','Dell','Dent',
@@ -286,7 +158,7 @@ townNameStarts2 = ['Act','Ad','Af','Ag','Ail','Ain','Al','All','Ald','Am','An','
                   'Wen','Wilm','Worm','Won','Wans',
                   'Yard','Yor','Yar','Yarn','Yen','Yat']
 
-townNameMiddles2 = ['an','al','all','aller','am','aigh','ang',
+townNameMiddles = ['an','al','all','aller','am','aigh','ang',
                    'er','en','enn','ee','eigh',
                    'ie','in','ing','igh',
                    'on','out','outer',
@@ -350,7 +222,7 @@ def makeRandomTownName():
 
     if b <= 0.3:
         # a beginning and an end
-        beginning = random.choice(townNameStarts2)
+        beginning = random.choice(townNameStarts)
         end = random.choice(townNameEndsWeighted)
         if end[0] == beginning[-1]:
             end = end[1:]
@@ -359,8 +231,8 @@ def makeRandomTownName():
 
     elif b > 0.3 and b <= 0.45:
         # a beginning a middle and an end
-        beginning = random.choice(townNameStarts2)
-        middle = random.choice(townNameMiddles2)
+        beginning = random.choice(townNameStarts)
+        middle = random.choice(townNameMiddles)
         if middle[0] == beginning[-1]:
             middle = middle[1:]
         end = random.choice(townNameEndsWeighted)
@@ -375,8 +247,8 @@ def makeRandomTownName():
 
     elif b > 0.45 and b <= 0.65:
         # a beginning and a middle
-        beginning = random.choice(townNameStarts2)
-        middle = random.choice(townNameMiddles2)
+        beginning = random.choice(townNameStarts)
+        middle = random.choice(townNameMiddles)
         if middle[0] == beginning[-1]:
             middle = middle[1:]
         newPart = beginning + middle
@@ -385,7 +257,7 @@ def makeRandomTownName():
 
     else:
         # a middle and an end
-        middle = random.choice(townNameMiddles2)
+        middle = random.choice(townNameMiddles)
         end = random.choice(townNameEndsWeighted)
         if end[0] == middle[-1]:
             end = end[1:]
@@ -401,7 +273,6 @@ def makeRandomTownName():
     return townName
 
 # we need to produce some towns
-
 class Town():
     def __init__(self,x,y,size):
         self.x = x
@@ -460,7 +331,6 @@ class Town():
 
     def findRouteTo(self,otherTown,townList,useDistance):
         # doin a kinda dijkstra
-
         unvisitedTowns = list(townList)
 
         dists = {}
@@ -669,8 +539,6 @@ class View():
             i.displaySelf(self.screen)
             i.displayRoutes(self.screen)
 
-        #plotADijkstra(self.townList,self.screen)
-
         # if we have a current town, display its deets
         if self.townMode == True:
             if self.currentTown != None:
@@ -792,6 +660,7 @@ def makeRandomTowns(number,xWidth,yWidth,edgeX,edgeY):
     return townList
 
 def makeWeightedSizeDistrbn():
+    # a kinda power law distribution of towns?
     a = random.random()
 
     return int(999*((-1/3)*math.log(1-a)))+1
@@ -931,85 +800,6 @@ def findDistByRoute(town1,town2,townList):
     else:
         return 1000000000
 
-def addConnectionsTooFarApart(townList,limitTimesCrow):
-    for town1 in townList:
-        if town1.size > 100:
-            for town2 in townList:
-                if town1 != town2:
-                    # find the route distance
-                    distByRoute = findDistByRoute(town1,town2,townList)
-
-                    # find crow flies distance
-
-                    distByCrow = (town1.x-town2.x)**2+ (town1.y-town2.y)**2
-
-                    if distByRoute > limitTimesCrow*distByCrow:
-                        # add new route
-                        town1.connections.append(town2)
-                        town2.connections.append(town1)
-
-
-def removeOverLappingRoutes(townList):
-    for town1 in townList:
-        foundOverlap = False
-        for town2 in town1.connections:
-            for town3 in townList:
-                for town4 in town3.connections:
-                    # we want to see if town1-town2 and town3-town4 overlap
-
-                    det = (town2.x-town1.x)*(town3.y-town4.y) + (town4.x-town3.x)*(town2.y-town1.y)
-
-                    if det != 0:
-                        # can overlap, not parallel
-                        lamda = ((town3.y-town4.y)*(town3.x-town1.x)+(town3.y-town1.y)*(town4.x-town3.x))/det
-
-                        if lamda < 1 and lamda > 0:
-                            # we are overlapping!!
-                            foundOverlap = True
-
-                            # we move the smallest town and collect it to the biggest on the other line
-                            if town1.size < town2.size:
-                                firstLineSmallest = town1
-                                firstLineBiggest = town2
-                            else:
-                                firstLineSmallest = town2
-                                firstLineBiggest = town1
-
-                            if town3.size < town4.size:
-                                secondLineSmallest = town3
-                                secondLineBiggest = town4
-                            else:
-                                secondLineSmallest = town4
-                                secondLineBiggest = town3
-
-                            if firstLineSmallest.size < secondLineSmallest.size:
-                                # first line has smaller, we remove
-                                firstLineSmallest.connections.remove(firstLineBiggest)
-                                firstLineBiggest.connections.remove(firstLineSmallest)
-
-                                # and connect to bigger of other two
-                                if secondLineBiggest not in firstLineSmallest.connections:
-                                    firstLineSmallest.connections.append(secondLineBiggest)
-                                    secondLineBiggest.connections.append(firstLineSmallest)
-
-                            else:
-                                # second line has smaller, we remove
-                                secondLineSmallest.connections.remove(secondLineBiggest)
-                                secondLineBiggest.connections.remove(secondLineSmallest)
-
-                                # and connect to bigger of other two
-                                if firstLineBiggest not in secondLineSmallest.connections:
-                                    secondLineSmallest.connections.append(firstLineBiggest)
-                                    firstLineBiggest.connections.append(secondLineSmallest)
-
-                            # escape
-                            break
-                    if foundOverlap == True:
-                        break
-
-                if foundOverlap == True:
-                    break
-
 def findClosestPointOnLineTo(point,lineStartPoint,lineEndPoint):
     # see MATLAB code
     newStartPoint = (lineStartPoint[0]-lineEndPoint[0],lineStartPoint[1]-lineEndPoint[1])
@@ -1044,164 +834,22 @@ def findDistPointToLine(point,lineStartPoint,lineEndPoint):
 
     return dist
 
+def addConnectionsTooFarApart(townList,limitTimesCrow):
+    for town1 in townList:
+        if town1.size > 100:
+            for town2 in townList:
+                if town1 != town2:
+                    # find the route distance
+                    distByRoute = findDistByRoute(town1,town2,townList)
 
-def findFurthestEast(townList):
-    if len(townList) > 0:
-        furthestEast = townList[0]
-        furthestDistance = townList[0].x
-        for i in townList:
-            if i.x > furthestDistance:
-                furthestEast = i
-                furthestDistance = i.x
+                    # find crow flies distance
 
-        return furthestEast
-    else:
-        return None
+                    distByCrow = (town1.x-town2.x)**2+ (town1.y-town2.y)**2
 
-def findFurthestSouth(townList):
-    if len(townList) > 0:
-        furthestSouth = townList[0]
-        furthestDistance = townList[0].y
-        for i in townList:
-            if i.y > furthestDistance:
-                furthestSouth = i
-                furthestDistance = i.y
-
-        return furthestSouth
-    else:
-        return None
-
-def findFurthestWest(townList):
-    if len(townList) > 0:
-        furthestWest = townList[0]
-        furthestDistance = townList[0].x
-        for i in townList:
-            if i.x < furthestDistance:
-                furthestWest = i
-                furthestDistance = i.x
-
-        return furthestWest
-    else:
-        return None
-
-def findFurthestNorth(townList):
-    if len(townList) > 0:
-        furthestNorth = townList[0]
-        furthestDistance = townList[0].y
-        for i in townList:
-            if i.y < furthestDistance:
-                furthestNorth = i
-                furthestDistance = i.y
-
-        return furthestNorth
-    else:
-        return None
-
-def findLeastConnections(townList):
-    leastConnections = townList[0]
-    numConnections = len(townList[0].connections)
-    for i in townList:
-        if len(i.connections) < numConnections:
-            leastConnections = i
-            numConnections = len(i.connections)
-
-    return leastConnections
-
-def findMostConnections(townList):
-    mostConnections = townList[0]
-    numConnections = len(townList[0].connections)
-    for i in townList:
-        if len(i.connections) > numConnections:
-            leastConnections = i
-            numConnections = len(i.connections)
-    return mostConnections
-
-def makeServices(townList):
-    # assume we already have physical rail connections
-    dupeTownList = list(townList)
-
-    serviceList = []
-
-    # find the east most town
-    tries = 0
-    while len(dupeTownList) > 0:
-        tries = tries + 1
-
-        originalMinTown = findFurthestEast(dupeTownList)
-        minTown = originalMinTown
-
-        # originalMinTown = findLeastConnections(dupeTownList)
-        # minTown = originalMinTown
-
-        print('---')
-        print('next go')
-        print('chosen min is {}'.format(minTown.name))
-        print('---')
-
-        newService = [minTown]
-        foundAll = False
-        while foundAll == False:
-            # some connections may have already been stolen by a different service!
-            legitConnections = list(minTown.connections)
-            # for i in legitConnections:
-            #     if i not in dupeTownList and i.size < 100 and len(legitConnections) > 1:
-            #         legitConnections.remove(i)
-
-
-            print('We are currently working on {}'.format(minTown.name))
-            print('all possible connections are ')
-            for i in minTown.connections:
-                print(i.name)
-            print('---')
-
-            nextMinWest = findFurthestWest(legitConnections)
-            # nextMinWest = findMostConnections(legitConnections)
-            # nextMinWest = findFurthestWest(minTown.connections)
-            if nextMinWest != None and nextMinWest not in newService:
-                newService.append(nextMinWest)
-                minTown = nextMinWest
-            else:
-                foundAll = True
-
-        if len(newService) <= 2:
-            print('we failed at west-east')
-            # we didnt find anything. Try an up down type service instead
-            newService = [originalMinTown]
-            foundAll = False
-            while foundAll == False:
-                legitConnections = list(minTown.connections)
-                # if minTown not in dupeTownList:
-                #     for i in legitConnections:
-                #         if i not in dupeTownList and i.size < 100 and len(legitConnections) > 1:
-                #             legitConnections.remove(i)
-
-                nextMinNorth = findFurthestNorth(legitConnections)
-                # nextMinNorth = findMostConnections(legitConnections)
-                # nextMinNorth = findFurthestNorth(minTown.connections)
-                if nextMinNorth != None and nextMinNorth not in newService:
-                    newService.append(nextMinNorth)
-                    minTown = nextMinNorth
-                else:
-                    foundAll = True
-
-        serviceList.append(Service(newService))
-        print('deleting time')
-        print('current list includes')
-        for i in dupeTownList:
-            print(i.name)
-        print('---')
-        print('service identified is ')
-        for i in newService:
-            print(i.name)
-        print('---')
-        print('gonna delete now')
-        for i in newService:
-            print(i.name)
-            if i in dupeTownList:
-                print('deleted')
-                dupeTownList.remove(i)
-
-    return serviceList
+                    if distByRoute > limitTimesCrow*distByCrow:
+                        # add new route
+                        town1.connections.append(town2)
+                        town2.connections.append(town1)
 
 def findTownConnectionWeightsSimple(town):
     townWeights = {}
@@ -1403,35 +1051,9 @@ def makeServicesWeighted(townList):
 
             serviceList.append(Service(newService))
 
-    # for x in range(0,1):
-    #     # repeat the same but with a different start town
-    #     startTown = sortedTownList[x]
-    #
-    #     newService = makeNewServiceList(startTown)
-    #
-    #     serviceList.append(Service(newService))
-    #
-    #     # we delete so we know that we have at least one service that visits that town
-    #     for i in newService:
-    #         if i in dupeTownList:
-    #             dupeTownList.remove(i)
-    #
-    # # now double check every town is included. If not, include by starting a service there
-    #
-    # if len(dupeTownList) > 0:
-    #     print('these poor towns didnt get included yet')
-    #     for town in dupeTownList:
-    #         print(town.name)
-    #         newService = makeNewServiceList(town)
-    #
-    #         serviceList.append(Service(newService))
-    #
-    #         # no need for deleting this time
-
     return serviceList
 
 ####################################
-
 
 # MAIN LOOP
 done = False
