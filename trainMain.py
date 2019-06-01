@@ -79,6 +79,82 @@ def drawLongText(text,screen,font,pos,maxWidth,lineHeight):
 
     return newPos # return the final position so we can place later text appropriately
 
+boyNames = ['Andy','Andrew','Albert','Alex','Alexander','Arthur','Anthony','Ant',
+            'Bob','Brian','Brennan','Brendan','Bart','Bartholomew','Bertie',
+            'Chris','Christopher','Colin','Charles','Charlie','Connor','Carl','Christian',
+            'David','Dave','Darren','Drew','Dom','Dominic','Dennis',
+            'Edgar','Ewan','Earl','Edward','Eddie',
+            'Francis','Frank','Fred','Frederic',
+            'Greg','Gary','Gazza','George',
+            'Harry','Harold','Horace','Henry','Howard',
+            'Ian','Ivan',
+            'Jason','Justin','John','Jon','Josh','Joshua','Jim','Jerry',
+            'Kenneth','Ken','Karl','Kieran',
+            'Louis','Lewis','Liam','Leo','Luke','Laurence','Larry','Les',
+            'Mike','Michael','Mark','Malcolm','Mo','Max',
+            'Nathan','Nicholas','Nick','Norman','Navid',
+            'Oscar','Oli','Ollie','Oliver','Owen',
+            'Pete','Peter','Pedro','Paul','Patrick','Pat'
+            'Quentin',
+            'Robert','Richard','Rich','Rick','Robin','Ron','Ronald','Rowan',
+            'Sam','Samuel','Sammy','Sebastian','Sebastien','Seamus','Simon','Stuart','Seb',
+            'Thomas','Tom','Tommy','Timothy','Tim','Tristan','Tristram','Tony',
+            'Ulysses',
+            'Victor','Victoire','Vince','Vincent',
+            'William','Will','Wes',
+            'Xavier',
+            'Yves',
+            'Zack','Zachary','Zacharias']
+
+girlNames = ['Andrea','Alison','Amy','Amelia','Arwen','Abigail','Abbie','Alice',
+             'Barbara','Barb','Bethany','Bethan',
+             'Chloe','Christel','Crystal','Carmen','Connie','Catherine','Cath',
+             'Deirdre','Dorothy','Dot','Dottie','Denise',
+             'Emily','Em','Emma','Emilia','Elsie','Elizabeth','Eleanor','Elinor','Ellen','Elena',
+             'Frances','Florence','Flo','Flossie',
+             'Gabrielle','Gabby','Georgina','Georgie','Greta','Gloria',
+             'Hannah','Hannie','Hattie','Harriet','Helen','Helena','Hazel','Hortense','Henrietta',
+             'Irene','Irena','Isabel','Isabella','Izzy','Issy',
+             'Jenny','Jenna','Jen','Jemima',
+             'Katherine','Kath','Kathy','Kat','Krystal','Karen',
+             'Lizzy','Lizzie','Louise','Lacey','Liz','Lauren','Laura',
+             'Mirjam','Miriam','Marnie','Margaret','Meg','Maggie','Mags','Martha','Maisy','Molly','Millie','Millicent','Mildred',
+             'Nicole','Nicola','Nicky','Naomi','Nellie','Nell',
+             'Olive','Olave',
+             'Penelope','Penny','Polly','Petunia','Poppy','Peggy',
+             'Rosie','Ros','Rosalyn','Rosalind','Rose','Rosa','Roberta',
+             'Sally','Susan','Sandy','Sandra','Shelley','Sophie','Soph','Stella','Sue',
+             'Tessa','Teresa','Terese','Tracy','Tracey','Tina','Tory',
+             'Vanessa','Victoria','Vicky',
+             'Wilhelmina','Wanda',
+             'Yvonne','Yvette',
+             'Zara']
+
+surnames = ['Anderson','Anders','Andrew','Andrews','Abbot','Abbott','Abbot','Abbotson','Atkinson',
+            'Broughley','Briarley','Benson','Beshley','Bottley','Brown','Browett','Brindle','Burns','Baker','Ball','Brockes','Bennett','Bennet','Banner','Bradshaw',
+            'Christian','Carlson','Carlsen','Colley','Chandler','Colin','Collins','Collinson','Cooper','Corbyn','Cobbold','Curry','Cohen','Creaghan','Chesney','Chester',
+            'Derrick','Dobson','Dentley','Dent','Deightley','Downs','Dabner','Day','Deigh','Dodd','Doddson','Davies','Docker',
+            'Edwinson','Edwardson','Elley','Ellinson','Ebb','Evans','Eggerton','Elliott',
+            'Francis','Feltchley','Fauntley','Frimley','French','Ford','Furniss',
+            'George','Garrison','Gaunt','Grey','Gray','Gordon','Gentle','Gentley','Greer','Gardener','Gardiner','Green','Goold','Gould','Granger','German','Greenslade','Greening','Godfrey',
+            'Hooper','Harrison','Howard','Hoppit','Hacker','Horton','Hunt','Hunter','Hammond','Hancock','Hamilton','Hutton','Harryman','Hughes',
+            'Ivanson','Inman',
+            'Johnson','Jotter','Jute','Jordan','Jones','Joiner','Jack','Jackson','Jenson','Jenkins',
+            'Karlsen','Karling','Karlin','Kooper','Kingson','King','Kerr',
+            'Laurence','Larson','Lampard','Leaman','Leeman','Lehmann',
+            'Malcolm','Martin','May','Mason','Miner','Moore',
+            'North','Norton','Norman','Naylor',
+            'Oatley','Oakley','Owens','Owen','O\'Connor','Oliver','O\'Reilly',
+            'Phillips','Philips','Philson','Potter','Parker','Parkinson','Painter','Pinter','Primrose','Priest','Priestley','Patterson','Pence','Posner','Pitt','Pitts','Portman','Porter',
+            'Quentin','Quilter','Quirrel',
+            'Roberts','Robertson','Richards','Richardson','Rowan','Reader','Rendell','Reardon-Smith','Robinson','Rayner','Rainer','Renner','Rusbridger','Rawnsley','Rees','Rowson','Ryan','Rudd',
+            'Stephenson','Stevenson','Stuart','Scuffell','Scollitt','Spencer','Stewart','Sabbagh','Scott','Slater',
+            'Tebbs','Thomas','Thompson','Teller','Tellitt','Titheridge','Thorpe','Taylor',
+            'Underson',
+            'Varley',
+            'Williamson','Williams','Walker','Watkins','Watkinson','Wyatt','Wellington','Weasley','West','Whorley','Wooldridge','Watson','Wiseman',
+            'Yenley','Yateley','Young']
+
 # town name bits
 
 townNameExtraStarts = ['North','East','South','West',
@@ -136,7 +212,7 @@ townNameEndsWeighted = ['ton','ton','ton','ton','ton','ton','ton','ton','ton','t
 townNameStarts = ['Act','Ad','Af','Ag','Ail','Ain','Al','All','Ald','Am','An','Ap','Ar','Art','As','At','Att','Arn',
                   'Bad','Back','Bag','Ban','Bat','Bran','Bed','Beg','Bel','Ben','Ber','Best','Bet','Bin','Big','Bit','Bog','Bon','Bot','Bott','Bud','Bug','Bun','Butt','But','Bur',
                   'Castle','Cad','Cag','Cal','Call','Cam','Can','Cap','Car','Cas','Cat','Cave','Cor','Cran','Corn','Com','Cosh','Cust','Church','Chur','Chor','Chatt','Chat','Chin','Cran','Craw','Crow',
-                  'Den','Del','Don','Dun','Dell','Dent',
+                  'Dab','Den','Del','Don','Dun','Dell','Dent',
                   'En','Ell','El','Em','Edg','Egg','Eg','End','Ent',
                   'Far','Farm','Farn','Fen','Fenn','Fern','Frim','Flash','Fast','Fett',
                   'Gor','Gon','Gunn','Gun','Gen','Garth','Got','Gott','Gut',
@@ -146,29 +222,28 @@ townNameStarts = ['Act','Ad','Af','Ag','Ail','Ain','Al','All','Ald','Am','An','A
                   'King','Kin','Kis','Ken','Ker','Kerr','Knut','Kirk',
                   'Leam','Len','Lem','Lon','Lun','Lud','Low','Lell','Len','Lesh',
                   'Mid','Mud','Mun','Mis','Mist','Must','Mount','Mumm','Ming','Man','Main','Mat','Map'
-                  'Narn','Nen','Nor','Nan','Nus','Nes','Nur','Nutt','Not','Nat',
-                  'On','Ow','Or','Os','Ost','Out',
+                  'Narn','Nor','Nan','Nus','Nes','Nur','Nutt','Not','Nat',
+                  'On','Or','Os','Ost','Out',
                   'Pun','Penn','Pin','Pip','Pup','Pell','Peg','Pag','Pad','Pat','Path',
                   'Quen','Quin',
                   'Rus','Red','Run','Rel','Rough','Ren','Rash','Rast','Ret','Rat','Rit',
                   'Shrew','Shell','Sel','South','Shaf','Ship','Sten','Set','Sat',
                   'Tan','Tun','Ton','Taun','Taunt','Trent','Tent','Turn','Tom','Teff','Test','Tesh','Tat',
-                  'Un',
                   'Ven','Van','Vin',
-                  'Wen','Wilm','Worm','Won','Wans',
+                  'Wen','Wilm','Won','Wans',
                   'Yard','Yor','Yar','Yarn','Yen','Yat']
 
-townNameMiddles = ['an','al','all','aller','am','aigh','ang',
-                   'er','en','enn','ee','eigh',
+townNameMiddles = ['an','al','all','aller','am','aigh','ang','alm',
+                   'er','en','ee','eigh',
                    'ie','in','ing','igh',
-                   'on','out','outer',
+                   'on','out',
                    'un',
                    'cas','cash',
-                   'don','dun','dough','deigh',
+                   'don','dun','deigh',
                    'ee','eth','edge',
                    'fer','fur','fern','fen','figh',
                    'get',
-                   'high','hot','hou',
+                   'high','hot',
                    'ker','kerr','kes','kel',
                    'mar','marn','mon','min','mun','men','mes',
                    'nan','nun','non','nonner','ning',
@@ -176,7 +251,6 @@ townNameMiddles = ['an','al','all','aller','am','aigh','ang',
                    'ren','run','ring','rug','rough',
                    'top','topper','tupper','tup','tip','tiller','ter',
                    'son','sur','ser','sir','stil','sten','stan',
-                   'ven','vin',
                    'wen','win','win','wan']
 
 riverNames = ['Alder','Arn','Allwater',
@@ -291,6 +365,8 @@ class Town():
 
         self.rect = pygame.Rect(self.x-self.displaySize,self.y-self.displaySize,2*self.displaySize,2*self.displaySize)
 
+        self.visitingServices = []
+
     def __hash__(self):
         return hash((self.x, self.y))
 
@@ -402,6 +478,10 @@ class Service():
         self.routePieceTimesReverse = self.timesToNextStation()
         self.routeStartTimesReverse = self.chooseStartTimes(self.routeReverse,self.routePieceTimesReverse)
 
+        # attach this service to that station
+        for i in route:
+            i.visitingServices.append(self)
+
     def displaySelf(self,screen,colour):
         for i in range(0,len(self.route)-1):
             pygame.draw.line(screen,colour,(self.route[i].x,self.route[i].y),(self.route[i+1].x,self.route[i+1].y),2)
@@ -449,9 +529,28 @@ class Service():
 
         return remainingRoute
 
+    def getRemainingRouteFromReverse(self,town):
+        remainingRoute = []
+        startAdding = False
+        for i in self.routeReverse:
+            if startAdding == True:
+                remainingRoute.append(i)
+            if i == town:
+                startAdding = True
+
+        return remainingRoute
+
     def getRouteUpTo(self,town):
         routeUpTo = []
         for i in self.route:
+            routeUpTo.append(i)
+            if i == town:
+                break
+        return routeUpTo
+
+    def getRouteUpToReverse(self,town):
+        routeUpTo = []
+        for i in self.routeReverse:
             routeUpTo.append(i)
             if i == town:
                 break
@@ -465,6 +564,36 @@ class Service():
             times[i] = int(0.5*dist)
 
         return times
+
+    def getTimeBetweenStations(self,station1,station2):
+        # note that these must be ordered correctly.
+        time = 0
+        counting = False
+        for i in range(0,len(self.route)-1):
+            if counting == True:
+                time = time + self.routePieceTimes[i]
+
+            if self.route[i] == station1:
+                counting = True
+            if self.route[i] == station2:
+                break
+
+        return time
+
+    def getTimeBetweenStationsReverse(self,station1,station2):
+        # note that these must be ordered correctly.
+        time = 0
+        counting = False
+        for i in range(0,len(self.routeReverse)-1):
+            if counting == True:
+                time = time + self.routePieceTimesReverse[i]
+
+            if self.routeReverse[i] == station1:
+                counting = True
+            if self.routeReverse[i] == station2:
+                break
+
+        return time
 
     def chooseStartTimes(self,route,routePieceTimes):
         totalRouteTime = 0
@@ -490,6 +619,194 @@ class Service():
         startTimes = [firstTrainTime + 60*i for i in range(0,numTrainsPerDay)]
 
         return startTimes
+
+class Passenger():
+    def __init__(self,townList):
+        a = random.random()
+        if a < 0.5:
+            self.name = random.choice(boyNames)
+        else:
+            self.name = random.choice(girlNames)
+        self.surname = random.choice(surnames)
+
+        self.homeTown = random.choice(townList)
+
+        possibleDestinations = list(townList)
+        possibleDestinations.remove(self.homeTown)
+        self.destination = random.choice(possibleDestinations)
+
+        print('got to find a service for this passenger')
+        b = self.findServicesTaken()
+        if b == False:
+            self.identifiedService = False
+            print('oops')
+        else:
+            self.identifiedService = True
+
+        self.opinion = random.random()
+
+    def findServicesTaken(self):
+        # first see if there is a direct service from where we want to go from to destination
+        print('--- finding service ---')
+        print('Going from {} to {}'.format(self.homeTown.name,self.destination.name))
+        print('Available services at {} are:'.format(self.homeTown.name))
+        count = 0
+
+        for service in self.homeTown.visitingServices:
+            # first check one way on route
+            print('--- Service {} ---'.format(count))
+            count = count + 1
+
+            remainingRoute = service.getRemainingRouteFrom(self.homeTown)
+
+
+            if self.destination in remainingRoute:
+                self.serviceTaken = [service]
+                self.wayStations = [self.homeTown, self.destination]
+
+                serviceTime = random.choice(service.routeStartTimes)
+
+                serviceTime = serviceTime + service.getTimeBetweenStations(service.route[0],self.homeTown)
+
+                endTime = serviceTime + service.getTimeBetweenStations(self.homeTown,self.destination)
+
+                self.stationTimes = [serviceTime,endTime]
+
+                return True
+
+            # then check the other
+            remainingRoute = service.getRemainingRouteFromReverse(self.homeTown)
+
+            if self.destination in remainingRoute:
+                self.serviceTaken = [service]
+                self.wayStations = [self.homeTown, self.destination]
+
+                serviceTime = random.choice(service.routeStartTimesReverse)
+
+                serviceTime = serviceTime + service.getTimeBetweenStationsReverse(service.route[0],self.homeTown)
+
+                endTime = serviceTime + service.getTimeBetweenStationsReverse(self.homeTown,self.destination)
+
+                self.stationTimes = [serviceTime,endTime]
+
+                return True
+
+        print('--- No direct connection found ---')
+        # what if we didnt find one?? We will have to change.
+        for service in self.homeTown.visitingServices:
+            remainingRoute = service.getRemainingRouteFrom(self.homeTown)
+            for town in remainingRoute:
+                print('---')
+                print('Trying to see if we can find a route from {} to {}'.format(town.name,self.destination.name))
+                print('Available services at {} are:'.format(town.name))
+                count = 0
+                for service2 in town.visitingServices:
+                    print('--- Service {} ---'.format(count))
+                    count = count + 1
+
+                    remainingRoute = service2.getRemainingRouteFrom(town)
+
+                    if self.destination in remainingRoute:
+                        self.serviceTaken = [service,service2]
+                        self.wayStations = [self.homeTown,town,self.destination]
+
+                        serviceTime = random.choice(service.routeStartTimes[0:3])
+                        serviceTime = serviceTime + service.getTimeBetweenStations(service.route[0],self.homeTown)
+
+                        arrivalIntermediate = serviceTime + service.getTimeBetweenStations(self.homeTown,town)
+
+                        # get the time at the intermediate station
+                        for i in range(0,len(service2.route)):
+                            timeAtIntermediate = service2.routeStartTimes[i] + service2.getTimeBetweenStations(service2.route[0],town)
+                            if timeAtIntermediate > arrivalIntermediate:
+                                break
+
+                        timeAtEnd = timeAtIntermediate + service2.getTimeBetweenStations(town,self.destination)
+
+                        self.stationTimes = [serviceTime, arrivalIntermediate , timeAtEnd]
+
+                        return True
+                    # and check reverse
+                    remainingRoute = service2.getRemainingRouteFromReverse(town)
+                    print(' reversed ')
+                    for j in service2.routeReverse:
+                        print(j.name)
+
+                    print('The route from {} is '.format(town.name))
+                    for j in remainingRoute:
+                        print(j.name)
+
+
+                    if self.destination in remainingRoute:
+                        self.serviceTaken = [service,service2]
+                        self.wayStations = [self.homeTown,town,self.destination]
+
+                        serviceTime = random.choice(service.routeStartTimesReverse[0:3])
+                        serviceTime = serviceTime + service.getTimeBetweenStationsReverse(service.route[0],self.homeTown)
+
+                        arrivalIntermediate = serviceTime + service.getTimeBetweenStationsReverse(self.homeTown,town)
+
+                        # get the time at the intermediate station
+                        for i in range(0,len(service2.route)):
+                            timeAtIntermediate = service2.routeStartTimes[i] + service2.getTimeBetweenStationsReverse(service2.route[0],town)
+                            if timeAtIntermediate > arrivalIntermediate:
+                                break
+
+                        timeAtEnd = timeAtIntermediate + service2.getTimeBetweenStationsReverse(town,self.destination)
+
+                        self.stationTimes = [serviceTime, arrivalIntermediate , timeAtEnd]
+
+                        return True
+
+            # check the other way too
+            remainingRoute = service.getRemainingRouteFromReverse(self.homeTown)
+            for town in remainingRoute:
+                for service2 in town.visitingServices:
+                    remainingRoute = service.getRemainingRouteFrom(town)
+                    if self.destination in remainingRoute:
+                        self.serviceTaken = [service,service2]
+                        self.wayStations = [self.homeTown,town,self.destination]
+
+                        serviceTime = random.choice(service.routeStartTimes[0:3])
+                        serviceTime = serviceTime + service.getTimeBetweenStations(service.route[0],self.homeTown)
+
+                        arrivalIntermediate = serviceTime + service.getTimeBetweenStations(self.homeTown,town)
+
+                        # get the time at the intermediate station
+                        for i in range(0,len(service2.route)):
+                            timeAtIntermediate = service2.routeStartTimes[i] + service2.getTimeBetweenStations(service2.route[0],town)
+                            if timeAtIntermediate > arrivalIntermediate:
+                                break
+
+                        timeAtEnd = timeAtIntermediate + service2.getTimeBetweenStations(town,self.destination)
+
+                        self.stationTimes = [serviceTime, arrivalIntermediate , timeAtEnd]
+
+                        return True
+                    # and check reverse
+                    remainingRoute = service.getRemainingRouteFromReverse(town)
+                    if self.destination in remainingRoute:
+                        self.serviceTaken = [service,service2]
+                        self.wayStations = [self.homeTown,town,self.destination]
+
+                        serviceTime = random.choice(service.routeStartTimesReverse[0:3])
+                        serviceTime = serviceTime + service.getTimeBetweenStationsReverse(service.route[0],self.homeTown)
+
+                        arrivalIntermediate = serviceTime + service.getTimeBetweenStationsReverse(self.homeTown,town)
+
+                        # get the time at the intermediate station
+                        for i in range(0,len(service2.route)):
+                            timeAtIntermediate = service2.routeStartTimes[i] + service2.getTimeBetweenStationsReverse(service2.route[0],town)
+                            if timeAtIntermediate > arrivalIntermediate:
+                                break
+
+                        timeAtEnd = timeAtIntermediate + service2.getTimeBetweenStationsReverse(town,self.destination)
+
+                        self.stationTimes = [serviceTime, arrivalIntermediate , timeAtEnd]
+
+                        return True
+
+        return False
 
 class View():
     def __init__(self,screen,font,worldRect,detailsRect):
@@ -521,6 +838,10 @@ class View():
         self.serviceMode = False
         self.displayedService = None
 
+        # displaying passengers
+        self.passengerMode = False
+        self.passenger = None
+
     def resetAllModeVariables(self):
         self.townMode = False
         self.currentTown = None
@@ -531,6 +852,9 @@ class View():
 
         self.serviceMode = False
         self.displayedService = None
+
+        self.passengerMode = False
+        self.passenger = None
 
     def displayView(self):
         screen.fill((200,255,255))
@@ -573,6 +897,59 @@ class View():
             # and display the times it departs initial station
             self.services[self.displayedService].displayTrainDepartureTimes(0,False,self.screen,self.font,currentPos,self.detailsRect.width,self.lineHeight)
 
+        if self.passengerMode == True:
+            if self.passenger.identifiedService == True:
+                # draw the coloured circles
+                town = self.passenger.wayStations[0]
+                pygame.draw.circle(screen,(150,0,200),(town.x,town.y),town.displaySize,0)
+                pygame.draw.circle(screen,(0,0,0),(town.x,town.y),town.displaySize,1)
+
+                if len(self.passenger.wayStations) == 3:
+                    town = self.passenger.wayStations[1]
+                    pygame.draw.circle(screen,(0,200,0),(town.x,town.y),town.displaySize,0)
+                    pygame.draw.circle(screen,(0,0,0),(town.x,town.y),town.displaySize,1)
+
+                town = self.passenger.wayStations[-1]
+                pygame.draw.circle(screen,(50,0,200),(town.x,town.y),town.displaySize,0)
+                pygame.draw.circle(screen,(0,0,0),(town.x,town.y),town.displaySize,1)
+
+                # draw the name
+                drawText(self.screen,self.font,self.passenger.name+' '+self.passenger.surname,self.detailsRect.topleft,(0,0,0))
+
+                text = 'Travelling from {} to {}.'.format(self.passenger.homeTown.name,self.passenger.destination.name)
+
+                nextPos = (self.detailsRect.topleft[0],self.detailsRect.topleft[1]+self.lineHeight)
+
+                nextPos = drawLongText(text,self.screen,self.font,nextPos,self.detailsRect.width,self.lineHeight)
+
+                text = 'Caught the {} from {}.'.format(convertMinToHourMin(self.passenger.stationTimes[0]),self.passenger.homeTown.name)
+
+                nextPos = drawLongText(text,self.screen,self.font,nextPos,self.detailsRect.width,self.lineHeight)
+
+                if len(self.passenger.wayStations) == 3:
+                    text = 'Changed at {} getting the {} to {}.'.format(self.passenger.wayStations[1].name,convertMinToHourMin(self.passenger.stationTimes[1]),self.passenger.serviceTaken[1].route[-1].name)
+                    nextPos = drawLongText(text,self.screen,self.font,nextPos,self.detailsRect.width,self.lineHeight)
+
+                text = 'Arrived at {} at {}.'.format(convertMinToHourMin(self.passenger.stationTimes[-1]),self.passenger.destination.name)
+
+                nextPos = drawLongText(text,self.screen,self.font,nextPos,self.detailsRect.width,self.lineHeight)
+
+                if self.passenger.opinion < 0.2:
+                    text = 'Had a bad journey. The train they were going to catch was cancelled.'
+                elif self.passenger.opinion < 0.8:
+                    text = 'Has had an uneventful journey.'
+                else:
+                    text = 'Has had a good journey.'
+
+                nextPos = drawLongText(text,self.screen,self.font,nextPos,self.detailsRect.width,self.lineHeight)
+
+            else:
+                text = 'Awks we couldnt find a route :('
+                drawLongText(text,self.screen,self.font,self.detailsRect.topleft,self.detailsRect.width,self.lineHeight)
+
+
+
+
         pygame.display.flip()
 
     def makeNewWorld(self,numberTowns):
@@ -610,6 +987,11 @@ class View():
             self.resetAllModeVariables()
             self.serviceMode = True
             self.displayedService = 0
+
+        elif mode == 'passenger':
+            self.resetAllModeVariables()
+            self.passengerMode = True
+            self.passenger = Passenger(self.townList)
 
     def displayTownDetails(self,town):
         self.currentTown = town
@@ -964,7 +1346,7 @@ def makeNewServiceList(town):
             # if we have any other case we have multiple choices, and have a change of ending
             bannedTowns = [prevTown]
             #bannedTowns = newService[min(0,len(newService)-3):]
-            nextTown = findNextTownWithBans(currentTown,bannedTowns)
+            nextTown = findNextTownWithBans(currentTown,newService)
 
             # if we have been previously we probs don't want to go again
             if nextTown in newService and len(nextTown.connections) <= 2:
@@ -1090,10 +1472,17 @@ try:
                     # key s
                     ourView.switchMode('service')
 
+                if event.scancode == 35:
+                    # key p
+                    ourView.switchMode('passenger')
+
                 if event.scancode == 49:
                     # space bar
                     if ourView.serviceMode == True:
                         ourView.changeDisplayedService()
+
+                    elif ourView.passengerMode == True:
+                        ourView.passenger = Passenger(ourView.townList)
 
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.scancode == 53):
                 done = True
