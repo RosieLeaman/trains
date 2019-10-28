@@ -10,7 +10,11 @@ Example output https://imgur.com/a/et00jF9
 
 Commands:
 Enter: produce an entirely new network
+
 i: info; after pressing this key when clicking on a town the town's name will be displayed and its population size
+
 p: passenger; will display information about a random passenger 
+
 s: service mode; pressing the space bar after pressing s will cycle through all the services between towns
+
 t: town; will require clicking two 'towns' and will then display the shortest route between them (direct)
